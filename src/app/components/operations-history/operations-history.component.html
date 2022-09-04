@@ -1,0 +1,21 @@
+<div class="container text-center">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Type</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let operation of operations; index as i">
+        <th scope="row" [textContent]="i"></th>
+        <td [textContent]="operation.operationType"></td>
+        <td [textContent]="operation.amount | currency:'EUR'"></td>
+        <td [textContent]="operation.operationDate | date: 'medium'"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

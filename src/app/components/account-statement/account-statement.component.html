@@ -1,0 +1,15 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    Account Number:
+    <p [textContent]="account.accountNumber" class="fw-bold"></p>
+  </li>
+  <li class="list-group-item">
+    Balance:
+    <p [textContent]="account.balance | currency:'EUR'" class="fw-bold"></p>
+
+  </li>
+  <li class="list-group-item">
+    Creation Date:
+    <p [textContent]="account.dateCreation | date: 'medium'" class="fw-bold"></p>
+  </li>
+</ul>

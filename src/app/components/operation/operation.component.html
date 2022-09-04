@@ -1,0 +1,49 @@
+<div class="container mt-3">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div *ngIf="f.errors" class="alert alert-danger">
+      <div *ngIf="f.errors?.['invalidOperation']">Entered amount is greater than your current balance {{ account.balance | currency:'EUR' }}</div>
+    </div>
+    <div *ngIf="showSuccessMsg" class="alert alert-success">your {{ executedOperation | lowercase }} request has been processed successfully</div>
+    <div ngModelGroup="operation" #contact="ngModelGroup">
+      <div class="mb-3">
+        <div class="form-check" *ngFor="let type of operationTypes; let first = first; index as i">
+          <input
+            class="form-check-input"
+            type="radio"
+            [(ngModel)]="defaultOperationType"
+            name="operationType" [value]="type.name"
+            [id]="i">
+          <label class="form-check-label" [for]="i">
+            {{ type.name }}
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="amount">Amount (in Euro)</label>
+        <input
+          required
+          max="100000"
+          ngModel
+          name="amount"
+          id="amount"
+          #amount="ngModel"
+          type="number"
+          class="form-control"
+        >
+        <div
+          class="form-text text-danger"
+          *ngIf="amount.touched && !amount.valid">
+          <div *ngIf="amount.errors?.['required']">
+            Amount is required
+          </div>
+          <div *ngIf="amount.errors?.['max']">
+            Maximum accepted amount in each operation is {{amount.errors?.['max'].max}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary mt-2" [disabled]="!f.valid">Submit</button>
+  </form>
+</div>
