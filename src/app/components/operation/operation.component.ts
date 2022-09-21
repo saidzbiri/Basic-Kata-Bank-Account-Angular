@@ -58,18 +58,21 @@ export class OperationComponent implements OnInit {
     let newOperation: Operation = {
       operationType: operation.operationType,
       amount: operation.amount,
-      account: this.account
+      accountNumber: this.account.accountNumber
     }
     this.operationService.create(newOperation)
-      .subscribe(res => {
-        this.updateAccount(res.account)
+      .subscribe(() => {
+        this.updateAccount(newOperation)
         this.showSuccessMsg = true;
         this.executedOperation = operation.operationType;
 
       });
   }
 
-  updateAccount(account: Account) {
-    this.accountService.setCurrentAccount(account);
+  updateAccount(newOperation: Operation) {
+    this.account.balance = (newOperation.operationType == 'Deposit') ?
+    (this.account.balance + newOperation.amount) :
+    (this.account.balance - newOperation.amount);
+    this.accountService.setCurrentAccount(this.account);
   }
 }

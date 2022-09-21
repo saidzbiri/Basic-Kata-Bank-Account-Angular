@@ -24,6 +24,7 @@
         <input
           required
           max="100000"
+          min="10"
           ngModel
           name="amount"
           id="amount"
@@ -36,6 +37,9 @@
           *ngIf="amount.touched && !amount.valid">
           <div *ngIf="amount.errors?.['required']">
             Amount is required
+          </div>
+          <div *ngIf="amount.errors?.['min']">
+            Minimum accepted amount in each operation is {{amount.errors?.['min'].min}}
           </div>
           <div *ngIf="amount.errors?.['max']">
             Maximum accepted amount in each operation is {{amount.errors?.['max'].max}}

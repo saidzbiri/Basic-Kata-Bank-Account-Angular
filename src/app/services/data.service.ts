@@ -31,7 +31,7 @@ export class DataService {
   create(resource: any): Observable<any> {
     let myHeaders = new HttpHeaders();
     myHeaders = myHeaders.append('Content-Type', 'application/json');
-    return this.http.post(this.url + SEPARATOR + 'create', JSON.stringify(resource), {headers: myHeaders})
+    return this.http.post(this.url, JSON.stringify(resource), {headers: myHeaders})
     .pipe(
       catchError(this.handleError)
     );

@@ -22,7 +22,7 @@ export class OperationsHistoryComponent implements OnInit {
 
   getAllOperations(accountNumber: number) {
     this.operationService.getAll(accountNumber)
-      .subscribe(res => this.operations = res);
+      .subscribe(res => this.operations = res['_embedded'].operationResourceList);
   }
 
 }
