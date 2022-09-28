@@ -8,6 +8,10 @@ Said Z'BIRI
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will be connected to backend application running in `http://localhost:8080/`
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/login`. 
+
+Log in with the username 'szbiri' and password '2022'
+
+The application will be connected to backend application running in `http://localhost:8080/`
 
 

@@ -17,15 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
-    //this.getAccountStatement(accountNumber);
   }
 
-  getAccountStatement(accountNumber: number): void {
-    this.accountService.get(accountNumber)
-      .subscribe(res => {
-        this.account = res;
-        this.accountService.setCurrentAccount(this.account);
-      });
-  }
 
 }

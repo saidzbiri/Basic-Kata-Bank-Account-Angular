@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let operation of operations; index as i">
+      <tr *ngFor="let operation of operations; index as i; trackBy: trackOperaion">
         <th scope="row" [textContent]="i"></th>
         <td [textContent]="operation.operationType"></td>
         <td [textContent]="operation.amount | currency:'EUR'"></td>

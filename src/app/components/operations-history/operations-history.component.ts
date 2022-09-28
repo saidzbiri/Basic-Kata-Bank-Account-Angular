@@ -22,7 +22,11 @@ export class OperationsHistoryComponent implements OnInit {
 
   getAllOperations(accountNumber: number) {
     this.operationService.getAll(accountNumber)
-      .subscribe(res => this.operations = res['_embedded'].operationResourceList);
+      .subscribe(res => this.operations = res['_embedded']?.operationResourceList);
+  }
+
+  trackOperaion(index: any, operation: Operation) {
+    return operation ? operation.operationId : undefined;
   }
 
 }

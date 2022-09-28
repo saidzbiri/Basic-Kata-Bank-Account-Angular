@@ -5,7 +5,7 @@ import { OperationService } from './services/operation.service';
 import { DataService } from './services/data.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,11 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptor } from './common/helpers/auth-interceptor';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './services/auth-guard.service';
+import { AppRoutingModule } from './app-routing.module';
+import { AppLayoutComponent } from './common/layouts/app-layout/app-layout.component';
 
 @NgModule({
   declarations: [
@@ -24,40 +29,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     OperationComponent,
     OperationsHistoryComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent,
+    AppLayoutComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomeComponent
-      },
-      {
-        path: 'account',
-        component: AccountStatementComponent
-      },
-      {
-        path: 'operation',
-        component: OperationComponent
-      },
-      {
-        path: 'history',
-        component: OperationsHistoryComponent
-      },
-      {
-        path: '**',
-        component: NotFoundComponent
-      },
-    ])
+    AppRoutingModule
   ],
   providers: [
     DataService,
     AccountService,
-    OperationService
+    OperationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
